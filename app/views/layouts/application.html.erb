@@ -7,13 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<h1>Breaktime</h1>
-<% if current_user %>
-  Signed in as <%= link_to current_user.name, user_path(current_user) %> | <%= link_to "Logout", '/logout' %>
-<% else %>
-  <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
-<% end %>
-<%= yield %>
-
+	<div class = "background">
+		<%= image_tag "stopwatch.jpg" %>
+		<div id="header-bar">
+			<div id="header-site-name">Breaktime</div>
+			<div id="header-user-id">
+				<% if current_user %>
+				  Signed in as <%= link_to current_user.name, user_path(current_user) %> | <%= link_to "Logout", '/logout' %>
+				<% else %>
+				  <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
+				<% end %>
+			</div>
+		</div>
+		<%= yield %>
+	</div>
 </body>
 </html>

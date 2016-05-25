@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525175124) do
+ActiveRecord::Schema.define(version: 20160525200600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,10 +33,10 @@ ActiveRecord::Schema.define(version: 20160525175124) do
   add_index "calendars", ["user_id"], name: "index_calendars_on_user_id", using: :btree
 
   create_table "friendships", force: :cascade do |t|
-    t.integer  "friend01_id"
-    t.integer  "friend02_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "timeboxes", force: :cascade do |t|

@@ -1,7 +1,9 @@
 <!-- User Profile Page -->
-
-<h1> Welcome, <%= current_user.name %>! </h1>
-
-<h3>Total Time Worked</h3>
-<h3>Total Time Breaked</h3>
-<h3>Total Timebox Cycle</h3>
+<div class = "header-spacer"></div>
+<div class = "user-container">
+<% if @user.id == current_user.id %>
+<%= render :partial => 'userview' %>
+<% else %>
+<%= render :partial => 'guestview'%>
+<% end %>
+</div>
