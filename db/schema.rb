@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525175124) do
+
+ActiveRecord::Schema.define(version: 20160525174301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "activities", force: :cascade do |t|
     t.string   "name"
@@ -54,15 +63,9 @@ ActiveRecord::Schema.define(version: 20160525175124) do
   add_index "timeboxes", ["activity_id"], name: "index_timeboxes_on_activity_id", using: :btree
   add_index "timeboxes", ["user_id"], name: "index_timeboxes_on_user_id", using: :btree
 
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
 
   add_foreign_key "calendars", "users"
   add_foreign_key "timeboxes", "activities"
   add_foreign_key "timeboxes", "users"
-end
+
+  end
