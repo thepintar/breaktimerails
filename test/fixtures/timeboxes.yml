@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  activity_id: 
+  time_worked: 1
+  time_breaked: 1
+  total_cycles: 1
+  work_block_time: 1
+  break_block_time: 1
+
+two:
+  user_id: 
+  activity_id: 
+  time_worked: 1
+  time_breaked: 1
+  total_cycles: 1
+  work_block_time: 1
+  break_block_time: 1

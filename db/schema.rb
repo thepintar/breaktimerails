@@ -11,10 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160525174301) do
+ActiveRecord::Schema.define(version: 20160525175124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "calendars", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "calendars", ["user_id"], name: "index_calendars_on_user_id", using: :btree
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "friend01_id"
+    t.integer  "friend02_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "timeboxes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "activity_id"
+    t.integer  "time_worked"
+    t.integer  "time_breaked"
+    t.integer  "total_cycles"
+    t.integer  "work_block_time"
+    t.integer  "break_block_time"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "timeboxes", ["activity_id"], name: "index_timeboxes_on_activity_id", using: :btree
+  add_index "timeboxes", ["user_id"], name: "index_timeboxes_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -24,4 +62,7 @@ ActiveRecord::Schema.define(version: 20160525174301) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "calendars", "users"
+  add_foreign_key "timeboxes", "activities"
+  add_foreign_key "timeboxes", "users"
 end
