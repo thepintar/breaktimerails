@@ -28,7 +28,8 @@ body {
 	z-index: 2;
 }
 
-#header-site-name{
+#header-site-name a{
+	text-decoration: none;
 	color: white;
 	font-size: 30px;
 	height: 32px;
@@ -41,7 +42,11 @@ body {
 	padding: 10px;
 }
 
-#header-user-id{
+#header-site-name a:hover {
+  font-size: 31px;
+}
+
+#header-user-id {
 	color: white;
 	display: inline-block;
 	font-family: "Arial Black", Gadget, sans-serif;
@@ -50,6 +55,15 @@ body {
 	right: 20px;
 	top: 20px;
 }
+
+#header-user-id a {
+	color: white;
+}
+
+#header-user-id a:hover {
+	font-size: 18px;
+}
+
 .spacer{
 	height: 20em;
 }
@@ -70,3 +84,24 @@ body {
 	width: 80%;
 	margin: 0 auto;
  }
+
+.profile-block {
+	background-color: white;
+	opacity: 0.8;
+	height: 30em;
+}
+
+.total-stats {
+ 	text-align: center;
+ 	font-size: 20px;
+}
+
+.profile-block .img-circle {
+	position: relative;
+	margin-top: 15px;
+	opacity: 1;
+ 	background-color: gray;
+	border-radius: 50%;
+	height: 150px;
+	width: 150px;
+}
