@@ -1,5 +1,12 @@
-<h1> Welcome, <%= current_user.name %>! </h1>
-
-	<h3>Total Time Worked</h3>
-	<h3>Total Time Breaked</h3>
-	<h3>Total Timebox Cycle</h3>
+<div class = "spacer"></div>
+<div class="profile-block"> 
+  <div class = "center-text"><%= current_user.name %>'s Profile</div>
+  <div class = "total-stats">
+  <%= image_tag "Gudetama.jpg", :class => "img-circle"%>
+  	<h3>Total Time Worked:</h3>
+  	<h3>Total Time Breaked:</h3>
+  	<h3>Total Timebox Cycle:</h3>
+    <h3>Break Activities:</h3>
+  </div>
+</div>
+<div class = "spacer"></div>
