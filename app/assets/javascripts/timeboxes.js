@@ -14,10 +14,9 @@ var Timer = function(){
 		return parseInt($("#timer-sec").html())
 	}
 	this.setTime = function(min, sec){
+		$("#timer-sec").css("top","-100px");
+		$("#timer-sec").animate({top: '75px'});
 		$("#timer-min").html(min);
-		$("#timer-min").animate({
-			top: '-40px'
-		});
 		$("#timer-sec").html(sec);
 	}
 }

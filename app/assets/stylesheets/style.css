@@ -131,21 +131,32 @@ body {
 }
 
 #timer-div{
-	width: 300px;
-	height: 300px;
+	position: relative;
+	width: 310px;
+	height: 310px;
 	border-radius: 100%;
 	margin: auto;
 	background-color: black;
 	color: white;
 	font-size: 120px;
+	overflow: hidden;
 }
 #timer-min{
-	margin-top: 75px;
+	position: absolute;
+	left: 20px;
+	top: 75px;
 	display: inline-block;
 	color: white;
 	font-size: 120px;
 }
+#timer-colon{
+	display: inline-block;
+	margin-top: 75px;
+}
 #timer-sec{
+	position: absolute;
+	right: 20px;
+	top: 75px;
 	display: inline-block;
 	color: white;
 	font-size: 120px;
