@@ -1,12 +1,16 @@
-<div class="container">
-<h1>Create a new Timebox!</h1>
-	<%= form_for @timebox do |f| %>
-	<%= f.label "Work block time:" %>
-	<%= f.select :work_block_time, [5, 10, 15 , 20] %><br>
-	<%= f.label "Break block time:" %>
-	<%= f.select :break_block_time, [5, 10, 15 , 20] %><br>
-	<%= f.label "Activity:" %>
-	<%= f.select :activity, ["wash hands", "eat pasta", "move the booty", "take a steamy dumper"] %><br>
-	<%= f.submit :class => "submit-button" %>
-<% end %>
+<div class = "header-spacer"></div>
+<div class = "timer-container">
+  <div id = "timer-block"> 
+  <div class="center-text">Create a new Timebox!</div>
+  	<%= form_for @timebox, :html => {:id => 'timer-selector' } do |f| %>
+  	<%= f.label "Work block time:" %>
+  	<%= f.select :work_block_time, [5, 10, 15 , 20] %><br>
+  	<%= f.label "Break block time:" %>
+  	<%= f.select :break_block_time, [5, 10, 15 , 20] %><br>
+  	<%= f.label "Activity:" %>
+  	<%= f.select :activity, ["wash hands", "eat pasta", "move the booty", "sashay away", "coffee break"] %><br>
+  	<%= f.submit :class => "submit-button" %>
+  <% end %>
+  </div>
+</div>
 </div>
