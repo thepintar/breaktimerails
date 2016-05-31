@@ -191,4 +191,25 @@ body {
 	background-color: green;
 	text-align: center;
 	font-size: 30px;
+	vertical-align: middle;
+}
+
+#pause-button{
+	width:90px;
+	height: 40px;
+	background-color: green;
+	text-align: center;
+	font-size: 30px;
+	display:none;
+	vertical-align: middle;
+}
+
+#resume-button{
+	width:90px;
+	height: 40px;
+	background-color: green;
+	text-align: center;
+	font-size: 25px;
+	display:none;
+	vertical-align: middle;
 }

@@ -1,49 +1,62 @@
+var intervalID;
+var timer;
+
 var Timer = function(){
-	this.getTime = function(){
-		return $("#timer-div")
+	this.getMin = function(){
+		return parseInt($("#timer-min").html())
+	}
+	this.getSec = function(){
+		return parseInt($("#timer-sec").html())
+	}
+	this.setTime = function(min, sec){
+		$("#timer-min").html(min);
+		$("#timer-sec").html(sec);
 	}
 }
 
-var TimeBox = function(min){
-	console.log("new Timebox")
-	var timer = new Timer();
+var TimeBox = function(){
+	var timeDisplay = new Timer();
 	var self = this;
-	this.minutes = min;
-	this.seconds = 0;
+	this.minutes = timeDisplay.getMin();
+	this.seconds = timeDisplay.getSec();
 
 	this.decrementTime = function(){
-			console.log("time decrementing")
-			console.log(self.minutes);
-			console.log(self.seconds);
 			if (self.seconds == 0){
 					self.seconds = 59;
 					self.minutes = self.minutes - 1;
-					console.log("minutes: " + self.minutes)
 				}
 				else {
 					self.seconds = self.seconds - 1;
-					console.log("seconds: " + self.seconds)
 				};
 			
 		}
 
-	this.updateDisplay = function (){
-		$("#timer-min").html(self.minutes);
-		if (self.seconds<10){
-			$("#timer-sec").html("0"+self.seconds)
+	this.updateDisplay = function(){
+		if (self.minutes<10){
+			displayMin = "0" + self.minutes;
 		} else {
-			$("#timer-sec").html(self.seconds);
+			displayMin = self.minutes;
 		}
+		if (self.seconds<10){
+			displaySec = "0"+self.seconds;
+		} else {
+			displaySec = self.seconds;
+		}
+		timeDisplay.setTime(displayMin, displaySec);
 	}
 
 	this.runTimer = function (){
-			console.log("one second passes")
-			self.updateDisplay();
+		if (self.checkTimeDone() == false) {
 			self.decrementTime();
+			self.updateDisplay();
+		} else {
+			console.log("timer done")
+			clearInterval(intervalID);
+		}
 	}
 
 	this.checkTimeDone = function (){
-			if (self.minutes === 0 && self.seconds === 0){
+			if (self.minutes == 0 && self.seconds == 0){
 				return true;
 			} else {
 				return false;
@@ -52,21 +65,24 @@ var TimeBox = function(min){
 }
 
 $(document).ready(function(){
-	var min = parseInt($("#timer-min").html());
-	var totalSec = min * 60;
-
 
 	$("#start-button").on("click", function(){
-		console.log("clicked new")
-		var intervalID;
-		timer = new TimeBox(min);
-		console.log(timer);
-		// intervalID = 
-		setInterval(timer.runTimer, 1000);
-		// if(timer.checkTimeDone() == true){
-		// 	clearInterval(intervalID);
-		// };
-		
+		$(this).toggle();
+		$("#pause-button").toggle();
+		timer = new TimeBox();
+		intervalID = setInterval(timer.runTimer, 1000);
+	});
+
+	$("#pause-button").on("click", function(){
+		$(this).toggle();
+		$("#resume-button").toggle();
+		clearInterval(intervalID);
+	});
+
+	$("#resume-button").on("click", function(){
+		$(this).toggle();
+		$("#pause-button").toggle();
+		intervalID = setInterval(timer.runTimer, 1000);
 	});
 
 });
