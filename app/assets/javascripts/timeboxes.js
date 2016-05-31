@@ -10,6 +10,9 @@ var Timer = function(){
 	}
 	this.setTime = function(min, sec){
 		$("#timer-min").html(min);
+		$("#timer-min").animate({
+			top: '-40px'
+		});
 		$("#timer-sec").html(sec);
 	}
 }
