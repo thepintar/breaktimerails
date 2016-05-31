@@ -12,7 +12,7 @@ class TimeboxesController < ApplicationController
 	end
 
 	def create
-		@timebox = Timebox.new(user_id: current_user.id, activity: Activity.find(1), work_block_time: 1, break_block_time: 1, time_worked: 0, time_breaked: 0, total_cycles: 0)
+		@timebox = Timebox.new(user_id: current_user.id, activity_id: params[:timebox][:activity_id], work_block_time: params[:timebox][:work_block_time], break_block_time: params[:timebox][:break_block_time], time_worked: 0, time_breaked: 0, total_cycles: 0)
 		if @timebox.save
 			redirect_to @timebox
 		else
