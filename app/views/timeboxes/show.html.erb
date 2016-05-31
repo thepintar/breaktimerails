@@ -1,3 +1,14 @@
 <h1>This is where each timebox will be displayed</h1>
 <h2>This is for timebox <%=@timebox.id%></h2>
 <h3>You must be <%= @timebox.creator.name %></h3>
+<% if @timebox.total_cycles == 0 %>
+	<h1>This box is active!!</h1>
+<% end %>
+<div class = "container">
+
+<div id = "timer-div">
+<div id = "timer-min"><%= @timebox.work_block_time %></div>:<div id = "timer-sec">00</div>
+</div>
+<div id = "start-button">Start</div>
+
+</div>

@@ -105,3 +105,34 @@ body {
 	height: 150px;
 	width: 150px;
 }
+
+.container {
+	width: 70%;
+	margin: 0 auto;
+}
+
+#timer-div{
+	width: 120px;
+	height: 40px;
+	background-color: red;
+	color: white;
+	font-size: 38px;
+}
+#timer-min{
+	display: inline-block;
+	color: white;
+	font-size: 38px;
+}
+#timer-sec{
+display: inline-block;
+	color: white;
+	font-size: 38px;
+}
+
+#start-button{
+	width:90px;
+	height: 40px;
+	background-color: green;
+	text-align: center;
+	font-size: 30px;
+}
