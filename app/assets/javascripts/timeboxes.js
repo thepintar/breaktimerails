@@ -72,6 +72,7 @@ $(document).ready(function(){
 	$("#start-button").on("click", function(){
 		$(this).toggle();
 		$("#pause-button").toggle();
+		$("#start-message").toggle();
 		timer = new TimeBox();
 		intervalID = setInterval(timer.runTimer, 1000);
 	});
@@ -79,12 +80,16 @@ $(document).ready(function(){
 	$("#pause-button").on("click", function(){
 		$(this).toggle();
 		$("#resume-button").toggle();
+		$("#pause-message").toggle();
+		$("#start-message").toggle();
 		clearInterval(intervalID);
 	});
 
 	$("#resume-button").on("click", function(){
 		$(this).toggle();
 		$("#pause-button").toggle();
+		$("#pause-message").toggle();
+		$("#start-message").toggle();
 		intervalID = setInterval(timer.runTimer, 1000);
 	});
 

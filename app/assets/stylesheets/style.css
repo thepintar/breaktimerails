@@ -106,7 +106,7 @@ body {
 #profile-block {
 	background-color: white;
 	opacity: 0.8;
-	height: 30em;
+	height: 35em;
 	border-radius: 15px;
 }
 
@@ -131,33 +131,32 @@ body {
 }
 
 #timer-div{
-	width: 120px;
-	height: 40px;
-	background-color: red;
+	width: 300px;
+	height: 300px;
+	border-radius: 100%;
+	margin: auto;
+	background-color: black;
 	color: white;
-	font-size: 38px;
+	font-size: 120px;
 }
 #timer-min{
+	margin-top: 75px;
 	display: inline-block;
 	color: white;
-	font-size: 38px;
+	font-size: 120px;
 }
 #timer-sec{
 	display: inline-block;
 	color: white;
-	font-size: 38px;
+	font-size: 120px;
 }
 
 #timer-block {
 	background-color: white;
 	opacity: 0.8;
-	height: 30em;
+	height: 35em;
 	border-radius: 15px;
-}
-
-#timer-block h1 {
 	text-align: center;
-	font-size: 40px;
 }
 
 #timer-selector {
@@ -186,30 +185,43 @@ body {
 }
 
 #start-button{
-	width:90px;
-	height: 40px;
 	background-color: green;
-	text-align: center;
-	font-size: 30px;
-	vertical-align: middle;
 }
 
 #pause-button{
-	width:90px;
-	height: 40px;
-	background-color: green;
-	text-align: center;
-	font-size: 30px;
-	display:none;
-	vertical-align: middle;
+	background-color: red;
+	display: none;
 }
 
 #resume-button{
-	width:90px;
-	height: 40px;
 	background-color: green;
+	display: none;
+}
+
+#timer-button {
 	text-align: center;
+	width: 150px;
+	height: 40px;
+	margin: auto;
+	margin-top: 25px;
 	font-size: 25px;
-	display:none;
-	vertical-align: middle;
+	font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#pause-message {
+	display: none;
+	font-family: Arial;
+	font-style: italic;
+	font-size: 14px;
+}
+
+#start-message {
+	display: none;
+	font-family: Arial;
+	font-style: italic;
+	font-size: 14px;
+}
+
+#countdown-container {
+	margin-top: 50px;
 }
