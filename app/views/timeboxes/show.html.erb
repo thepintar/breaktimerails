@@ -1,16 +1,32 @@
-<h1>This is where each timebox will be displayed</h1>
-<h2>This is for timebox <%=@timebox.id%></h2>
-<h3>You must be <%= @timebox.creator.name %></h3>
-<% if @timebox.total_cycles == 0 %>
-	<h1>This box is active!!</h1>
-<% end %>
-<div class = "container">
+<div class = "header-spacer"></div>
+<div class = "timer-container">
+  <div id = "timer-block"> 
+    <div class = "center-text">
+      This is where timebox type will be displayed
+    </div>
+    <div id = "countdown-container">
+      <div id = "timer-div">
+        <div id = "timer-min"><%= @timebox.work_block_time %></div>:<div id = "timer-sec">00</div>
+        </div>
+      </div>
+      <div id = "timer-button">
+        <div id = "start-button">Start</div>
+        <div id = "pause-button">Pause</div>
+        <div id = "resume-button">Resume</div>
+      </div>
 
-<div id = "timer-div">
-<div id = "timer-min"><%= @timebox.work_block_time %></div>:<div id = "timer-sec">00</div>
+      <div id = "pause-message">
+      <% if @timebox.total_cycles == 0 %>
+        <h1>Timebox is paused!</h1>
+      <% end %>
+      </div>
+
+      <div id = "start-message">
+      <% if @timebox.total_cycles == 0 %>
+        <h1>Timebox is active!</h1>
+      <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-<div id = "start-button">Start</div>
-<div id = "pause-button">Pause</div>
-<div id = "resume-button">Resume</div>
-
 </div>
