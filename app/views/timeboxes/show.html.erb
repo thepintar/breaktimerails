@@ -1,6 +1,6 @@
 <div class = "header-spacer"></div>
 <div id = "timer-block"></div>
-<div class = "timer-container">
+<div id = "timer-container">
     <div class = "center-text">
       Time to get to work, <%= @timebox.creator.name %>!
     </div>
@@ -37,6 +37,9 @@
 </div>
 
 <div id = "breaker-container">
+	<div class = "center-text">
+    Time to take a break, <%= @timebox.creator.name %>!
+  </div>
 	<div class = "countdown-container">
 	  <div id = "breaker-div">
 	    <div id = "breaker-min">
@@ -50,4 +53,5 @@
 	    <div id = "breaker-sec">00</div>
 	  </div>
 	</div>
+	
 </div>

@@ -125,7 +125,15 @@ body {
 	width: 150px;
 }
 
-.timer-container {
+#timer-container {
+	width: 80%;
+	margin: 0 auto;
+	position: relative;
+	top: -35em;
+}
+
+#breaker-container {
+	display: none;
 	width: 80%;
 	margin: 0 auto;
 	position: relative;
@@ -172,7 +180,6 @@ body {
 }
 
 #breaker-div{
-	display: none;
 	position: relative;
 	width: 310px;
 	height: 310px;
@@ -194,7 +201,9 @@ body {
 }
 #breaker-colon{
 	display: inline-block;
-	margin-top: 75px;
+	margin-top: 70px;
+	position: absolute;
+	left: 44%;
 }
 #breaker-sec{
 	position: absolute;

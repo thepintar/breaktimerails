@@ -4,9 +4,9 @@
   <div class="center-text">Create a new Timebox!</div>
   	<%= form_for @timebox, :html => {:id => 'timer-selector' } do |f| %>
   	<%= f.label "Work block time:" %>
-  	<%= f.select :work_block_time, [5, 10, 15 , 20] %><br>
+  	<%= f.select :work_block_time, [1, 5, 10, 15 , 20] %><br>
   	<%= f.label "Break block time:" %>
-  	<%= f.select :break_block_time, [5, 10, 15 , 20] %><br>
+  	<%= f.select :break_block_time, [1,5, 10, 15 , 20] %><br>
   	<%= f.label "Activity:" %>
     <%= collection_select(:timebox, :activity_id, Activity.all, :id, :activity_name, prompt: true) %><br>
   	<%= f.submit :class => "submit-button" %>
