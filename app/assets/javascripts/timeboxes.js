@@ -7,17 +7,27 @@ var timer;
 //Timer is our view function, and serves to both set and retrieve the current time from the DOM.
 
 var Timer = function(){
-	this.getMin = function(){
+	this.getWorkMin = function(){
 		return parseInt($("#timer-min").html())
 	}
-	this.getSec = function(){
+	this.getWorkSec = function(){
 		return parseInt($("#timer-sec").html())
 	}
-	this.setTime = function(min, sec){
+	this.setWorkTime = function(min, sec){
 		$("#timer-sec").css("top","-100px");
 		$("#timer-sec").animate({top: '75px'});
 		$("#timer-min").html(min);
 		$("#timer-sec").html(sec);
+	}
+	this.getBreakMin = function(){
+		return parseInt($("#breaker-min").html())
+	}
+	this.getBreakSec = function(){
+		return parseInt($("#breaker-sec").html())
+	}
+	this.setBreakTime = function(min, sec){
+		$("#breaker-min").html(min);
+		$("#breaker-sec").html(sec);
 	}
 }
 
@@ -27,19 +37,22 @@ var Timer = function(){
 var TimeBox = function(){
 	var timeDisplay = new Timer();
 	var self = this;
-	this.minutes = timeDisplay.getMin();
-	this.seconds = timeDisplay.getSec();
+	this.workMinutes = timeDisplay.getWorkMin();
+	this.workSeconds = timeDisplay.getWorkSec();
+	this.breakMinutes = timeDisplay.getBreakMin();
+	this.breakSeconds = timeDisplay.getBreakSec();
+	this.cycles = 0;
 
 //this function does what its called- it decrements the value of each second, and each minute once the second value
 //reaches 0, at which point it resets the seconds to 59.
 
 	this.decrementTime = function(){
-			if (self.seconds == 0){
-					self.seconds = 59;
-					self.minutes = self.minutes - 1;
+			if (self.workSeconds == 0){
+					self.workSeconds = 59;
+					self.workMinutes = self.workMinutes - 1;
 				}
 				else {
-					self.seconds = self.seconds - 1;
+					self.workSeconds = self.workSeconds - 1;
 				};
 			
 		}
@@ -47,22 +60,22 @@ var TimeBox = function(){
 //updateDisplay makes calls to the view, supplying the new values of the time.
 
 	this.updateDisplay = function(){
-		if (self.minutes<10){
-			displayMin = "0" + self.minutes;
+		if (self.workMinutes<10){
+			displayMin = "0" + self.workMinutes;
 		} else {
-			displayMin = self.minutes;
+			displayMin = self.workMinutes;
 		}
-		if (self.seconds<10){
-			displaySec = "0"+self.seconds;
+		if (self.workSeconds<10){
+			displaySec = "0"+self.workSeconds;
 		} else {
-			displaySec = self.seconds;
+			displaySec = self.workSeconds;
 		}
-		timeDisplay.setTime(displayMin, displaySec);
+		timeDisplay.setWorkTime(displayMin, displaySec);
 	}
 
-//checkTimeDone checks to see if we've reached 0 minutes and 0 seconds, and returns true if so.
+//checkTimeDone checks to see if we've reached 0 workMinutes and 0 workSeconds, and returns true if so.
 	this.checkTimeDone = function (){
-			if (self.minutes == 0 && self.seconds == 0){
+			if (self.workMinutes == 0 && self.workSeconds == 0){
 				return true;
 			} else {
 				return false;
