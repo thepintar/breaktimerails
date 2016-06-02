@@ -220,7 +220,10 @@ body {
 #timebox-id{
 	display: none;
 }
-
+#cycles{
+	color: red;
+	font-size: 50px;
+}
 #timer-button {
 	text-align: center;
 	width: 150px;

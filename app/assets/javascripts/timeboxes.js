@@ -1,5 +1,5 @@
 //these two variables are instantiated globally so they can be accessed anywhere.
-//workInterval will be the name of the timer function and timer will be the instance of the TimeBox controller we create.
+//workInterval will be the name of the timer function and timer will be the instance of the Timer controller we create.
 
 var timerInterval;
 var timer;
@@ -9,7 +9,7 @@ var breakTime;
 
 //Timer is our view function, and serves to both set and retrieve the current time from the DOM.
 
-var Timer = function(){
+var Clock = function(){
 	this.getMin = function(){
 		return parseInt($("#timer-min").html())
 	}
@@ -17,28 +17,35 @@ var Timer = function(){
 		return parseInt($("#timer-sec").html())
 	}
 	this.setTime = function(min, sec){
-		$("#timer-sec").css("top","-10px");
-		$("#timer-sec").animate({top: '75px'});
 		$("#timer-min").html(min);
 		$("#timer-sec").html(sec);
 	}
-	this.swapClocks = function(){
-		$("#timer-container").toggle();
-		$("#breaker-container").toggle();
-	}
 }
 
-//TimeBox is the controller function, handling manipulating the time
+//Timer is the controller function, handling manipulating the time
 //Initializing it creates a new instance of the view, Timer (better names pending), which grabs the data from the rendered page.
 
-var TimeBox = function(){
-	timeDisplay = new Timer();
+var Timer = function(){
+
+	//create new view instance for rendering data to the DOM
+	timeDisplay = new Clock();
+
+	//javascripts timer function defaults 'this' to the window, so its necessary to create a surrogate
 	var self = this;
-	this.minutes = timeDisplay.getMin();
-	this.seconds = timeDisplay.getSec();
-	var totalMin = this.minutes
-	var totalSec = this.Seconds
-	this.cycles = 0;
+
+	//the status variable will be used to keep track of which segment the timer is running in and which view to render
+	var status = "work"
+
+	//set the initial timer state
+	this.minutes = workTime;
+	this.seconds = 0;
+
+	//initialize the final stats data
+	var totalWorkMin = 0;
+	var totalWorkSec = 0;
+	var totalBreakMin = 0;
+	var totalBreakSec = 0;
+	var cycles = 0;
 
 //this function does what its called- it decrements the value of each second, and each minute once the second value
 //reaches 0, at which point it resets the seconds to 59.
@@ -51,7 +58,6 @@ var TimeBox = function(){
 				else {
 					self.seconds = self.seconds - 1;
 				};
-			
 		}
 
 //updateDisplay makes calls to the view, supplying the new values of the time.
@@ -62,22 +68,40 @@ var TimeBox = function(){
 		} else {
 			displayMin = self.minutes;
 		}
-		if (self.Seconds<10){
-			displaySec = "0"+self.Seconds;
+		if (self.seconds<10){
+			displaySec = "0"+self.seconds;
 		} else {
-			displaySec = self.Seconds;
+			displaySec = self.seconds;
 		}
 		timeDisplay.setTime(displayMin, displaySec);
 	}
 
 //checkTimeDone checks to see if we've reached 0 minutes and 0 Seconds, and returns true if so.
 	this.checkTimeDone = function (){
-			if (self.minutes == 0 && self.Seconds == 0){
+			if (self.minutes == 0 && self.seconds == 0){
 				return true;
 			} else {
 				return false;
 			}
 		}
+
+	this.swapClocks = function (){
+		if (status == "work") {
+			status = "break";
+			self.minutes = breakTime;
+			self.seconds = 0;
+			totalWorkMin = totalWorkMin + workTime;
+			timerInterval = setInterval(timer.runTimer, 1000);
+		} else {
+			cycles = cycles + 1;
+			$("#cycles").html("cycles: " + cycles);
+			status = "work";
+			self.minutes = workTime;
+			self.seconds = 0;
+			totalBreakMin = totalBreakMin + breakTime;
+			timerInterval = setInterval(timer.runTimer, 1000);
+		}
+	}
 
 //runTimer is the big boss of all the other functions, calling them in order, pending approval from the 
 //checkTimeDone function. Will be adding more logic here to switch to the break-timer when the -timer reaches 0.
@@ -87,10 +111,8 @@ var TimeBox = function(){
 			self.updateDisplay();
 		} else {
 			console.log("timer done")
-			clearInterval(Interval);
-			timeDisplay.swapClocks();
-			$("#timer-min").html(totalMin)
-			breakInterval = setInterval(timer.runBreaker, 1000)
+			clearInterval(timerInterval);
+			self.swapClocks();
 		}
 	}
 
@@ -120,14 +142,14 @@ $(document).ready(function(){
 	});
 
 //when the start button is clicked, it hides and we set the interval method into motion, calling runTimer every second
-//on the TimeBox instance we have just created. Also, a pause button appears to replace the start button.
+//on the Timer instance we have just created. Also, a pause button appears to replace the start button.
 
 	$("#start-button").on("click", function(){
 		$(this).toggle();
 		$("#pause-button").toggle();
 		$("#start-message").toggle();
-		timer = new TimeBox();
-		Interval = setInterval(timer.runTimer, 1000);
+		timer = new Timer();
+		timerInterval = setInterval(timer.runTimer, 1000);
 	});
 
 //when the pause button is clicked, the timer is stopped and a resume button replaces the pause button.
