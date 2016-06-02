@@ -8,9 +8,12 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   post '/signup' => 'users#create'
 
+  post '/activity' => 'activities#create'
+
   resources :users
   resources :friendships
   resources :timeboxes
+  resources :activities
 
   get '/timeboxes/:id/info' => 'timeboxes#time_info'
 
