@@ -13,6 +13,12 @@ end
 User.create(name: "user", email: "user@user.com", password: "password")
 User.create(name: "Guest", email: "guest@breaktimerails.com", password: "password")
 
-30.times do
-	Activity.create(name: Faker::Hipster.word, description: Faker::Hipster.sentence(8))
+# 30.times do
+# 	Activity.create(name: Faker::Hipster.word, description: Faker::Hipster.sentence(8))
+# end
+
+activities = ["Coffee Break", "Browse Internet", "Walk", "Call Mom", "Stretch"]
+
+activities.each do |activity|
+  Activity.create(name: activity, description: Faker::Hipster.sentence(2))
 end
