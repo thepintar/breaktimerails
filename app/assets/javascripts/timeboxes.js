@@ -15,7 +15,7 @@ var Timer = function(){
 		return parseInt($("#timer-sec").html())
 	}
 	this.setWorkTime = function(min, sec){
-		$("#timer-sec").css("top","-100px");
+		$("#timer-sec").css("top","-10px");
 		$("#timer-sec").animate({top: '75px'});
 		$("#timer-min").html(min);
 		$("#timer-sec").html(sec);
