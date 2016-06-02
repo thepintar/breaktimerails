@@ -10,6 +10,8 @@
 	User.create(name: Faker::Name.name, email: Faker::Internet.email, password:'password')
 end
 
+User.create(name: "user", email: "user@user.com", password: "password")
+
 30.times do
 	Activity.create(name: Faker::Hipster.word, description: Faker::Hipster.sentence(8))
 end
