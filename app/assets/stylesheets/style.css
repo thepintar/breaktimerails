@@ -283,5 +283,25 @@ body {
 	font-size: 14px;
 }
 
+.activity-container {
+	width: 80%;
+	margin: 0 auto;
+}
 
+#activity-block {
+	background-color: white;
+	opacity: 0.8;
+	height: 20em;
+	border-radius: 15px;
+}
 
+#activity-form {
+	width: 50%;
+	margin: auto;
+	margin-top: 60px;
+}
+
+#activity-list {
+	margin: auto;
+	width: 200px;
+}

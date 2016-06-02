@@ -1,0 +1,15 @@
+<!-- Activity Index Page -->
+<div class = "header-spacer"></div>
+<div class = "activity-container"> 
+  <div id = "activity-block"> 
+    <div class="center-text">Customize your activities</div>
+    <div id = "activity-list">
+      <ul>
+        <% @activities.each do |activity| %>
+          <li><%= activity.name %></li>
+        <% end %><br>
+        <%= link_to "Add a new activity", new_activity_path(@activity)  %><br>
+      </ul>
+    </div>
+  </div>
+</div>

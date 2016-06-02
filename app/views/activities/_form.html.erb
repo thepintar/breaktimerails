@@ -1,20 +1,18 @@
-<%= form_for @activity do |f| %> 
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
- 
-  <p>
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
-
-   <p class="flash">
-      <%= flash.notice %>
-  </p>
- 
-<% end %>
+  <div id = "activity-form">
+    <%= form_for @activity do |f| %> 
+      <p>
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+      </p>
+      <p>
+        <%= f.label :description %><br>
+        <%= f.text_area :description %>
+      </p>
+      <p>
+        <%= f.submit %>
+      </p>
+       <p class="flash">
+          <%= flash.notice %>
+      </p>
+    <% end %>
+  </div>
