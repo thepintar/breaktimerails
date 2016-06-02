@@ -6,6 +6,9 @@ var timer;
 var timeDisplay;
 var workTime;
 var breakTime;
+var user;
+var breakMessage;
+var workMessage;
 
 //Timer is our view function, and serves to both set and retrieve the current time from the DOM.
 
@@ -87,7 +90,9 @@ var Timer = function(){
 
 	this.swapClocks = function (){
 		if (status == "work") {
+			var airHorn = document.getElementById("airhorn");
 			status = "break";
+			$(".center-text").html(breakMessage)
 			self.minutes = breakTime;
 			self.seconds = 0;
 			totalWorkMin = totalWorkMin + workTime;
@@ -96,6 +101,7 @@ var Timer = function(){
 			cycles = cycles + 1;
 			$("#cycles").html("cycles: " + cycles);
 			status = "work";
+			$(".center-text").html(workMessage)
 			self.minutes = workTime;
 			self.seconds = 0;
 			totalBreakMin = totalBreakMin + breakTime;
@@ -110,8 +116,12 @@ var Timer = function(){
 			self.decrementTime();
 			self.updateDisplay();
 		} else {
-			console.log("timer done")
+			//play airhorn sound when the clock gets to 0
+			var airHorn = document.getElementById("airhorn");
+			airHorn.play();
+			//stop the timer
 			clearInterval(timerInterval);
+			//call the swapClock function, which resets the clock to display the proper time and swaps from work to break etc.
 			self.swapClocks();
 		}
 	}
@@ -130,6 +140,7 @@ $(document).ready(function(){
 		workTime = timeboxData.work_block_time;
 		breakTime = timeboxData.break_block_time;
 		activity = timeboxData.activity;
+		user = timeboxData.user_name;
 		$("#start-button").toggle();
 		if(workTime<10){
 			$("#timer-min").html("0" + workTime);
@@ -139,6 +150,8 @@ $(document).ready(function(){
 		}
 		$("#timer-colon").html(":")
 		$("#timer-sec").html("00");
+		breakMessage = "You can " + activity + " now! Go nuts!";
+		workMessage = "Okay, back to work, " + user + "!"; 
 	});
 
 //when the start button is clicked, it hides and we set the interval method into motion, calling runTimer every second
