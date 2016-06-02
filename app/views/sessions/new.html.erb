@@ -1,11 +1,18 @@
 <!-- Log-in Page -->
 
-<h1>Login</h1>
+<div class = "header-spacer"></div>
+<div class = "user-container">
+  <div class="registration-block"> 
+  <div class="center-text"> Login</div>
 
-<%= form_tag '/login' do %>
+  <div id = "login-form">
+    <%= form_tag '/login' do %>
 
-  Email: <%= text_field_tag :email %>
-  Password: <%= password_field_tag :password %>
-  <%= submit_tag "Submit" %>
+      Email: <%= text_field_tag :email %><br>
+      Password: <%= password_field_tag :password %><br>
+      <%= submit_tag "Submit" %>
 
-<% end %>
+    <% end %>
+  </div>
+  </div>
+</div>
