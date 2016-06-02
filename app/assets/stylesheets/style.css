@@ -4,7 +4,7 @@ body {
 
 .background {
 	position: relative;
-	/*overflow: hidden;*/
+	/*overflow: hidden;form*/
 }
 
 .background img {
@@ -76,7 +76,7 @@ body {
 .center-text {
 	text-align: center;
 	font-family: "Arial Black", Gadget, sans-serif;
-	font-size: 40px;
+	font-size: 36px;
 	padding-top: 15px;
 }
 
@@ -290,3 +290,25 @@ body {
 .countdown-container {
 	margin-top: 50px;
 }
+
+.registration-block {
+	background-color: white;
+	opacity: 0.8;
+	height: 20em;
+	border-radius: 15px;
+}
+
+#registration-form {
+	width: 50%;
+	margin: auto;
+	margin-top: 60px;
+}
+
+#login-form {
+	width: 50%;
+	margin: auto;
+	margin-top: 60px;
+}
+
+
+
