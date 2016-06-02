@@ -1,19 +1,28 @@
-<!-- User login page -->
+<!-- Registration page -->
 
 <div class = "header-spacer"></div>
 <div class = "user-container">
-  <div class = "registration-block"> 
+  <div id = "registration-block"> 
   <div class = "center-text"> Signup for an account!</div>
 
-  <div id = "login-form">
-  <%= form_for :user, url: '/users' do |f| %>
-
-    Name: <%= f.text_field :name %><br>
-    Email: <%= f.text_field :email %><br>
-    Password: <%= f.password_field :password %><br>
-    Password Confirmation: <%= f.password_field :password_confirmation %><br>
-    <%= f.submit "Submit" %>
-
-  <% end %>
+  <div id = "registration-form">
+    <%= form_for :user, url: '/users' do |f| %>
+      Name: <%= f.text_field :name %><br>
+      Email: <%= f.text_field :email %><br>
+      Password: <%= f.password_field :password %><br>
+      Password Confirmation: <%= f.password_field :password_confirmation %><br>
+      <%= f.submit "Submit" %>
+    <% end %>
+    <p class="flash">
+      <%= flash.notice %>
+    </p>
+   
+    <ul class = "errors">
+      <% if @errors %>
+        <% @errors.each do |error| %>
+        <li><%= error %></li>
+        <% end %>
+      <% end %>
+    </ul>
   </div>
 </div>
