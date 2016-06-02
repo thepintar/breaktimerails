@@ -302,6 +302,5 @@ body {
 }
 
 #activity-list {
-	margin: auto;
-	width: 200px;
+	margin-left:100px;
 }

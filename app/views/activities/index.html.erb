@@ -6,7 +6,7 @@
     <div id = "activity-list">
       <ul>
         <% @activities.each do |activity| %>
-          <li><%= activity.name %></li>
+          <li><%= activity.name + ": " + activity.description %></li>
         <% end %><br>
         <%= link_to "Add a new activity", new_activity_path(@activity)  %><br>
       </ul>
