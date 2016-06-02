@@ -33,7 +33,7 @@ class TimeboxesController < ApplicationController
 
 	def time_info
 		@timebox = Timebox.find(params[:id])
-		render json: {work_block_time: @timebox.work_block_time, break_block_time: @timebox.break_block_time, activity: @timebox.activity.name}
+		render json: {work_block_time: @timebox.work_block_time, break_block_time: @timebox.break_block_time, activity: @timebox.activity.name, user_name: @timebox.creator.name}
 	end
 
 end
