@@ -1,4 +1,5 @@
 <div class = "header-spacer"></div>
+<div id = "timebox-id"><%= @timebox.id %></div>
 <div id = "timer-block"></div>
 <div id = "timer-container">
     <div class = "center-text">
@@ -7,14 +8,9 @@
     <div class = "countdown-container">
       <div id = "timer-div">
         <div id = "timer-min">
-        	<% if @timebox.work_block_time < 10 %>
-	        	0<%= @timebox.work_block_time %>
-        	<% else %>
-	        	<%= @timebox.work_block_time %>
-        	<% end %>
         </div>
-        <div id="timer-colon">:</div>
-        <div id = "timer-sec">00</div>
+        <div id="timer-colon"></div>
+        <div id = "timer-sec"></div>
       </div>
     </div>
     <div id = "timer-button">
@@ -34,24 +30,4 @@
         <h1>Timebox is active!</h1>
       <% end %>
     </div>
-</div>
-
-<div id = "breaker-container">
-	<div class = "center-text">
-    Time to take a break, <%= @timebox.creator.name %>!
-  </div>
-	<div class = "countdown-container">
-	  <div id = "breaker-div">
-	    <div id = "breaker-min">
-				<% if @timebox.break_block_time < 10 %>
-	      	0<%= @timebox.break_block_time %>
-	    	<% else %>
-	      	<%= @timebox.break_block_time %>
-	    	<% end %>	
-	    </div>
-	    <div id="breaker-colon">:</div>
-	    <div id = "breaker-sec">00</div>
-	  </div>
-	</div>
-	
 </div>
