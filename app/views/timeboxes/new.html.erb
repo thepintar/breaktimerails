@@ -9,6 +9,7 @@
   	<%= f.select :break_block_time, [1,5, 10, 15 , 20] %><br>
   	<%= f.label "Activity:" %>
     <%= collection_select(:timebox, :activity_id, Activity.all, :id, :activity_name, prompt: true) %><br>
+    <%= link_to "Add a new activity", new_activity_path(@activity)  %><br>
   	<%= f.submit :class => "submit-button" %>
   <% end %>
   </div>
