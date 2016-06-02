@@ -132,14 +132,6 @@ body {
 	top: -35em;
 }
 
-#breaker-container {
-	display: none;
-	width: 80%;
-	margin: 0 auto;
-	position: relative;
-	top: -35em;
-}
-
 #timer-div{
 	position: relative;
 	width: 310px;
@@ -167,45 +159,6 @@ body {
 	left: 44%;
 }
 #timer-sec{
-	position: absolute;
-	right: 20px;
-	top: 75px;
-	display: inline-block;
-	color: white;
-	font-size: 120px;
-}
-.breaker-container {
-	width: 80%;
-	margin: 0 auto;
-}
-
-#breaker-div{
-	position: relative;
-	width: 310px;
-	height: 310px;
-	border-radius: 100%;
-	margin: auto;
-	background-color: black;
-	opacity: 1;
-	color: white;
-	font-size: 120px;
-	overflow: hidden;
-}
-#breaker-min{
-	position: absolute;
-	left: 20px;
-	top: 75px;
-	display: inline-block;
-	color: white;
-	font-size: 120px;
-}
-#breaker-colon{
-	display: inline-block;
-	margin-top: 70px;
-	position: absolute;
-	left: 44%;
-}
-#breaker-sec{
 	position: absolute;
 	right: 20px;
 	top: 75px;
@@ -251,6 +204,7 @@ body {
 
 #start-button{
 	background-color: green;
+	display: none;
 }
 
 #pause-button{
@@ -263,6 +217,13 @@ body {
 	display: none;
 }
 
+#timebox-id{
+	display: none;
+}
+#cycles{
+	color: red;
+	font-size: 50px;
+}
 #timer-button {
 	text-align: center;
 	width: 150px;

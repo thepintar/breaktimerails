@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   resources :friendships
   resources :timeboxes
 
+  get '/timeboxes/:id/info' => 'timeboxes#time_info'
+
 end
