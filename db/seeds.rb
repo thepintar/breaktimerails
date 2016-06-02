@@ -11,6 +11,7 @@
 end
 
 User.create(name: "user", email: "user@user.com", password: "password")
+User.create(name: "Guest", email: "guest@breaktimerails.com", password: "password")
 
 30.times do
 	Activity.create(name: Faker::Hipster.word, description: Faker::Hipster.sentence(8))

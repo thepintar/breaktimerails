@@ -6,13 +6,20 @@ class TimeboxesController < ApplicationController
 
   def create
   end
+
   def show
 		@timebox = Timebox.find(params[:id])
-		redirect_to '/' if @timebox.creator != current_user
+		redirect_to '/' if @timebox.creator != current_user && @timebox.creator != User.find_by(name: "Guest")
 	end
 
 	def create
-		@timebox = Timebox.new(user_id: current_user.id, activity_id: params[:timebox][:activity_id], work_block_time: params[:timebox][:work_block_time], break_block_time: params[:timebox][:break_block_time], time_worked: 0, time_breaked: 0, total_cycles: 0)
+		@guest = User.find_by name: "Guest"
+		if current_user
+			@user_id = current_user.id
+		else
+			@user_id = @guest.id
+		end
+		@timebox = Timebox.new(user_id: @user_id, activity_id: params[:timebox][:activity_id], work_block_time: params[:timebox][:work_block_time], break_block_time: params[:timebox][:break_block_time], time_worked: 0, time_breaked: 0, total_cycles: 0)
 		if @timebox.save
 			redirect_to @timebox
 		else
