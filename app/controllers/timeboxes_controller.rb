@@ -4,10 +4,6 @@ class TimeboxesController < ApplicationController
     @timebox = Timebox.new
   end
 
-  def create
-
-  end
-
   def show
 		@timebox = Timebox.find(params[:id])
 		redirect_to '/' if @timebox.creator != current_user && @timebox.creator != User.find_by(name: "Guest")
@@ -21,7 +17,10 @@ class TimeboxesController < ApplicationController
 			@user_id = @guest.id
 		end
 		@timebox = Timebox.new(user_id: @user_id, activity_id: params[:timebox][:activity_id], work_block_time: params[:timebox][:work_block_time], break_block_time: params[:timebox][:break_block_time], time_worked: 0, time_breaked: 0, total_cycles: 0)
+
 		if @timebox.save
+			# render plain: params[:timebox][:detail][:count].inspect
+			@detail = Detail.create(timebox_id: @timebox.id, notes: params[:timebox][:detail][:notes], count: params[:timebox][:detail][:count])
 			redirect_to @timebox
 		else
       flash.notice = "Please select an activity"
