@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602191625) do
+ActiveRecord::Schema.define(version: 20160603174743) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160602191625) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.boolean  "countable"
   end
 
   create_table "calendars", force: :cascade do |t|
@@ -31,6 +32,14 @@ ActiveRecord::Schema.define(version: 20160602191625) do
   end
 
   add_index "calendars", ["user_id"], name: "index_calendars_on_user_id", using: :btree
+
+  create_table "details", force: :cascade do |t|
+    t.integer "timebox_id"
+    t.text    "notes"
+    t.integer "count"
+  end
+
+  add_index "details", ["timebox_id"], name: "index_details_on_timebox_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
@@ -73,6 +82,7 @@ ActiveRecord::Schema.define(version: 20160602191625) do
   end
 
   add_foreign_key "calendars", "users"
+  add_foreign_key "details", "timeboxes"
   add_foreign_key "favorites", "activities"
   add_foreign_key "favorites", "users"
   add_foreign_key "timeboxes", "activities"

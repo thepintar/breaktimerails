@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- SQL XML created by WWW SQL Designer, http://code.google.com/p/wwwsqldesigner/ -->
-<!-- Active URL: https://schemadesigner.devbootcamp.com/ -->
+<!-- Active URL: http://schemadesigner.devbootcamp.com/ -->
 <sql>
 <datatypes db="mysql">
   <group label="Numeric" color="rgb(238,238,170)">
@@ -74,6 +74,9 @@
 <row name="description" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
+<row name="countable" null="1" autoincrement="0">
+<datatype>BINARY</datatype>
+<default>NULL</default></row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
@@ -141,5 +144,22 @@
 <part>id</part>
 </key>
 </table>
+<table x="767" y="167" name="details">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="timebox_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="timeboxes" row="id" />
+</row>
+<row name="notes" null="1" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>NULL</default></row>
+<row name="count" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
 </sql>
-
