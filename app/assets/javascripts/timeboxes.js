@@ -9,6 +9,7 @@ var breakTime;
 var user;
 var breakMessage;
 var workMessage;
+var message;
 
 //Timer is our view function, and serves to both set and retrieve the current time from the DOM.
 
@@ -92,7 +93,8 @@ var Timer = function(){
 		if (status == "work") {
 			var airHorn = document.getElementById("airhorn");
 			status = "break";
-			$(".center-text").html(breakMessage)
+			message = breakMessage;
+			$(".center-text").html(message)
 			self.minutes = breakTime;
 			self.seconds = 0;
 			totalWorkMin = totalWorkMin + workTime;
@@ -101,7 +103,8 @@ var Timer = function(){
 			cycles = cycles + 1;
 			$("#cycles").html("cycles: " + cycles);
 			status = "work";
-			$(".center-text").html(workMessage)
+			message = workMessage;
+			$(".center-text").html(message)
 			self.minutes = workTime;
 			self.seconds = 0;
 			totalBreakMin = totalBreakMin + breakTime;
@@ -119,6 +122,14 @@ var Timer = function(){
 			//play airhorn sound when the clock gets to 0
 			var airHorn = document.getElementById("airhorn");
 			airHorn.play();
+			if(window.Notification && Notification.permission !== "denied") {
+				Notification.requestPermission(function(status) {  // status is "granted", if accepted by user
+					var n = new Notification('Title', { 
+						body: message,
+						icon: '/assets/Gudetama.jpg' // optional
+					}); 
+				});
+			}
 			//stop the timer
 			clearInterval(timerInterval);
 			//call the swapClock function, which resets the clock to display the proper time and swaps from work to break etc.
