@@ -19,6 +19,8 @@ User.create(name: "Guest", email: "guest@breaktimerails.com", password: "passwor
 
 activities = ["Coffee Break", "Browse Internet", "Walk", "Call Mom", "Stretch"]
 
-activities.each do |activity|
-  Activity.create(name: activity, description: Faker::Hipster.sentence(2))
-end
+
+Activity.create(name: "Coffee Break", description: "A cup of hot, steamy brown goes down smooth and keeps the peepers open!", countable: false)
+Activity.create(name: "Browse Internet", description: "OMG! Whats trending on twitter?? WHO FACEBOOKED ME!? Life's important questions. Get answers.", countable: false)
+Activity.create(name: "Walk", description: "Stroll it out my friend. A stretch of the gams is worth two in the hams.", countable: false)
+
