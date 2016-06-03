@@ -5,6 +5,7 @@ class TimeboxesController < ApplicationController
   end
 
   def create
+
   end
 
   def show
@@ -23,6 +24,7 @@ class TimeboxesController < ApplicationController
 		if @timebox.save
 			redirect_to @timebox
 		else
+      flash.notice = "Please select an activity"
 			render "timeboxes/new"
 		end
 	end
