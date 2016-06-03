@@ -5,8 +5,14 @@
     <div class="center-text">Customize your activities</div>
     <div id = "activity-list">
       <ul>
-        <% @activities.each do |activity| %>
-          <li><%= activity.name + ": " + activity.description %></li>
+        <% if current_user %>
+          <% @favorites.each do |favorite| %>
+            <li><%= favorite.activity.name %></li>
+          <% end %>
+        <% else %>
+          <% @activities.each do |activity| %>
+            <li><%= activity.name %></li>
+          <% end %>
         <% end %><br>
         <%= link_to "Add a new activity", new_activity_path(@activity)  %><br>
       </ul>
