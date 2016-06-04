@@ -9,6 +9,9 @@ var breakTime;
 var user;
 var breakMessage;
 var workMessage;
+var message;
+var activityCount = 0;
+var activityCountable;
 
 //Timer is our view function, and serves to both set and retrieve the current time from the DOM.
 
@@ -37,18 +40,16 @@ var Timer = function(){
 	var self = this;
 
 	//the status variable will be used to keep track of which segment the timer is running in and which view to render
-	var status = "work"
+	this.status = "work"
 
 	//set the initial timer state
 	this.minutes = workTime;
 	this.seconds = 0;
 
 	//initialize the final stats data
-	var totalWorkMin = 0;
-	var totalWorkSec = 0;
-	var totalBreakMin = 0;
-	var totalBreakSec = 0;
-	var cycles = 0;
+	this.totalWorkMin = 0;
+	this.totalBreakMin = 0;
+	this.cycles = 0;
 
 //this function does what its called- it decrements the value of each second, and each minute once the second value
 //reaches 0, at which point it resets the seconds to 59.
@@ -89,22 +90,26 @@ var Timer = function(){
 		}
 
 	this.swapClocks = function (){
-		if (status == "work") {
+		if (self.status == "work") {
 			var airHorn = document.getElementById("airhorn");
-			status = "break";
-			$(".center-text").html(breakMessage)
+			self.status = "break";
+			message = breakMessage;
+			$(".center-text").html(message)
 			self.minutes = breakTime;
 			self.seconds = 0;
-			totalWorkMin = totalWorkMin + workTime;
+			self.totalWorkMin = self.totalWorkMin + workTime;
 			timerInterval = setInterval(timer.runTimer, 1000);
 		} else {
-			cycles = cycles + 1;
-			$("#cycles").html("cycles: " + cycles);
-			status = "work";
-			$(".center-text").html(workMessage)
+			if(activityCountable == true){
+			activityCount = activityCount + parseInt(prompt("How many "+activity +"s did you do on your break?", "0"));}
+			self.cycles = self.cycles + 1;
+			$("#cycles").html("cycles: " + self.cycles);
+			self.status = "work";
+			message = workMessage;
+			$(".center-text").html(message)
 			self.minutes = workTime;
 			self.seconds = 0;
-			totalBreakMin = totalBreakMin + breakTime;
+			self.totalBreakMin = self.totalBreakMin + breakTime;
 			timerInterval = setInterval(timer.runTimer, 1000);
 		}
 	}
@@ -119,6 +124,14 @@ var Timer = function(){
 			//play airhorn sound when the clock gets to 0
 			var airHorn = document.getElementById("airhorn");
 			airHorn.play();
+			if(window.Notification && Notification.permission !== "denied") {
+				Notification.requestPermission(function(status) {  // status is "granted", if accepted by user
+					var n = new Notification('Title', { 
+						body: message,
+						icon: '/assets/Gudetama.jpg' // optional
+					}); 
+				});
+			}
 			//stop the timer
 			clearInterval(timerInterval);
 			//call the swapClock function, which resets the clock to display the proper time and swaps from work to break etc.
@@ -141,6 +154,7 @@ $(document).ready(function(){
 		breakTime = timeboxData.break_block_time;
 		activity = timeboxData.activity;
 		user = timeboxData.user_name;
+		activityCountable = timeboxData.countable;
 		$("#start-button").toggle();
 		if(workTime<10){
 			$("#timer-min").html("0" + workTime);
@@ -161,6 +175,7 @@ $(document).ready(function(){
 		$(this).toggle();
 		$("#pause-button").toggle();
 		$("#start-message").toggle();
+		$("#exit-button").toggle();
 		timer = new Timer();
 		timerInterval = setInterval(timer.runTimer, 1000);
 	});
@@ -183,6 +198,24 @@ $(document).ready(function(){
 		$("#pause-message").toggle();
 		$("#start-message").toggle();
 		timerInterval = setInterval(timer.runTimer, 1000);
+	});
+
+	$("#exit-button").on("click", function(){
+		clearInterval(timerInterval);
+		if(timer.status == "work"){
+		timer.totalWorkMin = timer.totalWorkMin + ( workTime - timer.minutes )
+	} else {
+		timer.totalBreakMin = timer.totalBreakMin + ( breakTime - timer.minutes )
+	};
+	$.ajax({
+		type: "PUT",
+		url: "/timeboxes/" + $("#timebox-id").html(),
+		data: {time_worked: timer.totalWorkMin, time_breaked: timer.totalBreakMin, total_cycles: timer.cycles}
+	})
+	.done(function(response){
+		$("#timer-container").empty();
+	});
+
 	});
 
 });
