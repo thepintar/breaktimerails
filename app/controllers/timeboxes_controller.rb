@@ -14,6 +14,7 @@ class TimeboxesController < ApplicationController
 	end
 
 	def create
+		p params[:timebox]
 		@guest = User.find_by name: "Guest"
 		if current_user
 			@user_id = current_user.id
