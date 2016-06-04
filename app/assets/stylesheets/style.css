@@ -205,6 +205,19 @@ body {
 #start-button{
 	background-color: green;
 	display: none;
+
+}
+
+#exit-button{
+	display: none;
+	text-align: center;
+	background-color: red;
+	width: 150px;
+	height: 40px;
+	margin: auto;
+	margin-top: 25px;
+	font-size: 25px;
+	font-family: "Arial Black", Gadget, sans-serif;
 }
 
 #pause-button{

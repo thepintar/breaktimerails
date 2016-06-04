@@ -33,7 +33,17 @@ class TimeboxesController < ApplicationController
 
 	def time_info
 		@timebox = Timebox.find(params[:id])
-		render json: {work_block_time: @timebox.work_block_time, break_block_time: @timebox.break_block_time, activity: @timebox.activity.name, user_name: @timebox.creator.name}
+		render json: {work_block_time: @timebox.work_block_time, break_block_time: @timebox.break_block_time, activity: @timebox.activity.name, user_name: @timebox.creator.name, countable: @timebox.activity.countable}
+	end
+
+	def update
+		if request.xhr?
+			@timebox = Timebox.find(params[:id])
+			@timebox.update_attributes(time_worked: params[:time_worked], time_breaked: params[:time_breaked], total_cycles: params[:total_cycles])
+			render {success}
+		else
+			render "/"
+		end
 	end
 
 end
