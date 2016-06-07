@@ -12,7 +12,7 @@
   	<%= f.select :break_block_time, [1,5, 10, 15 , 20] %><br>
   	<%= f.label "Activity:" %>
       <% if current_user %>
-        <%= collection_select(:favorite, :activity_id, Favorite.where(user_id: current_user.id), :id, :favorite_name, prompt: true) %>
+        <%= collection_select(:timebox, :activity_id, current_user.favorite_activities, :id, :name, prompt: true) %>
       <% else %>
         <%= collection_select(:timebox, :activity_id, Activity.limit(5), :id, :activity_name, prompt: true) %>
       <% end %><br>
