@@ -21,10 +21,15 @@ class TimeboxesController < ApplicationController
 		else
 			@user_id = @guest.id
 		end
-		@timebox = Timebox.new(user_id: @user_id, activity_id: params[:timebox][:activity_id], work_block_time: params[:timebox][:work_block_time], break_block_time: params[:timebox][:break_block_time], time_worked: 0, time_breaked: 0, total_cycles: 0)
+		@timebox = Timebox.new(timebox_params)
+		@timebox.user_id = @user_id
 		if @timebox.save
+			p @timebox
+			puts "timebox saves"
 			redirect_to @timebox
 		else
+			p @timebox
+			puts "timebox doesn't save"
       flash.notice = "Please select an activity"
 			render "timeboxes/new"
 		end
@@ -48,5 +53,11 @@ class TimeboxesController < ApplicationController
 			render "/"
 		end
 	end
+
+  private
+
+    def timebox_params
+      params.require(:timebox).permit(:activity_id, :work_block_time, :break_block_time, time_worked: 0, time_breaked: 0, total_cycles: 0)
+    end
 
 end
