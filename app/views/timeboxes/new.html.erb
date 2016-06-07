@@ -19,14 +19,6 @@
 
     <br>
     <%= link_to "Customize activities", activities_path  %><br>
-    <br>
-    <%= f.fields_for :detail do |item| %>
-    <%= item.label "Activity Counter/Reps:" %>
-    <%= item.text_field :count %><br>
-    <%= item.label "Notes:" %>
-    <%= item.text_area :notes %><br>
-    <% end %>
-  	<%= f.submit :class => "submit-button" %>
   <% end %>
   </div>
 </div>
