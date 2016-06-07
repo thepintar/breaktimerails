@@ -4,10 +4,6 @@ class TimeboxesController < ApplicationController
     @timebox = Timebox.new
   end
 
-  def create
-
-  end
-
   def show
 		@timebox = Timebox.find(params[:id])
 		redirect_to '/' if @timebox.creator != current_user && @timebox.creator != User.find_by(name: "Guest")
@@ -21,6 +17,7 @@ class TimeboxesController < ApplicationController
 		else
 			@user_id = @guest.id
 		end
+
 		@timebox = Timebox.new(timebox_params)
 		@timebox.user_id = @user_id
 		if @timebox.save
