@@ -6,12 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-20.times do
-	User.create(name: Faker::Name.name, email: Faker::Internet.email, password:'password')
-end
 
-User.create(name: "user", email: "user@user.com", password: "password")
-User.create(name: "Guest", email: "guest@breaktimerails.com", password: "password")
 
 # 30.times do
 # 	Activity.create(name: Faker::Hipster.word, description: Faker::Hipster.sentence(8))
@@ -28,3 +23,20 @@ Activity.create(name: "Stretch", description: "A lengthened bod is an A+ bod. Sa
 Activity.create(name: "Push-ups", description: "Drop and gimme as many as you got in there ya old sack o' bones!", countable: true)
 Activity.create(name: "Jumping Jacks", description: "Before there was jogging and lattes, there were jumping jacks!", countable: true)
 Activity.create(name: "Crunches", description: "Get ripped just in time for the next round of New Years Resolutions!", countable: true)
+
+user_num = 1
+20.times do
+	User.create(name: Faker::Name.name, email: Faker::Internet.email, password:'password')
+	activities = Activity.limit(5)
+  activities.each do |activity|
+    Favorite.create(user_id: user_num, activity_id: activity.id)
+  end
+  user_num += 1
+end
+
+User.create(name: "user", email: "user@user.com", password: "password")
+User.create(name: "Guest", email: "guest@breaktimerails.com", password: "password")
+activities = Activity.limit(5)
+  activities.each do |activity|
+    Favorite.create(user_id: 21, activity_id: activity.id)
+  end
