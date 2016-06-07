@@ -24,19 +24,17 @@ Activity.create(name: "Push-ups", description: "Drop and gimme as many as you go
 Activity.create(name: "Jumping Jacks", description: "Before there was jogging and lattes, there were jumping jacks!", countable: true)
 Activity.create(name: "Crunches", description: "Get ripped just in time for the next round of New Years Resolutions!", countable: true)
 
-user_num = 1
 20.times do
-	User.create(name: Faker::Name.name, email: Faker::Internet.email, password:'password')
-	activities = Activity.limit(5)
+	user = User.create(name: Faker::Name.name, email: Faker::Internet.email, password:'password')
+	activities = Activity.limit(8)
   activities.each do |activity|
-    Favorite.create(user_id: user_num, activity_id: activity.id)
+    Favorite.create(user_id: user.id, activity_id: activity.id)
   end
-  user_num += 1
 end
 
 User.create(name: "user", email: "user@user.com", password: "password")
 User.create(name: "Guest", email: "guest@breaktimerails.com", password: "password")
-activities = Activity.limit(5)
+activities = Activity.limit(8)
   activities.each do |activity|
     Favorite.create(user_id: 21, activity_id: activity.id)
   end
