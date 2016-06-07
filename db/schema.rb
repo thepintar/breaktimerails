@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 20160603174743) do
   create_table "activities", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.boolean  "countable"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "countable",   default: false
   end
 
   create_table "calendars", force: :cascade do |t|
