@@ -1,10 +1,99 @@
+<!--Load the AJAX API-->
+    
+    <script type="text/javascript">
+    var timeWorked;
+    var timeBreaked;
+    var timeCycles;
+    var activityArray=[];
+    var numOfActivities;
+    var url = $("#header-user-id a").first().attr("href") + "/data"
+    $(document).ready(function(){
+    	$.ajax({
+    		type: "GET",
+				url: url})
+    	.done(function(userData){
+    		console.log(userData);
+    		timeWorked = userData.timeWorked;
+    		timeBreaked = userData.timeBreaked;
+    		timeCycles = userData.timeCycles;
+    		activityArray = userData.activityArray;
+    		numOfActivities = activityArray.length;
+    	})
+
+
+    	// Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Activity');
+        data.addColumn('number', 'Times Used');
+        for(i=0; i<numOfActivities; i++){
+        	data.addRow(activityArray[i])
+        }
+
+        // data.addRows([
+        //   ['Mushrooms', 3],
+        //   ['Onions', 1],
+        //   ['Olives', 1],
+        //   ['Zucchini', 1],
+        //   ['Pepperoni', 2]
+        // ]);
+
+        // Set chart options
+        var options = {'title':'Your Break Activity Frequency',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      
+      var dataTwoArray = [["TimeBlock", "Time", { role: "style" } ]];
+      var dataTwo = google.visualization.arrayToDataTable([
+        ["TimeBlock", "Time", { role: "style" } ],
+        ["Minutes Worked", timeWorked, "#b87333"],
+        ["Minutes Breaked", timeBreaked, "silver"],
+        ["Total Cycles", timeCycles, "gold"]
+      ]);
+
+      var view = new google.visualization.DataView(dataTwo);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Your Timebox Data!",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+
+    })
+      
+    </script>
 <div id="profile-block"> 
   <div class = "center-text"><%= current_user.name %>'s Profile</div>
   <div class = "total-stats">
   <%= image_tag "Gudetama.jpg", :class => "img-circle"%>
-  	<h3>Total Time Worked:</h3>
-  	<h3>Total Time Breaked:</h3>
-  	<h3>Total Timebox Cycle:</h3>
-    <h3>Break Activities:</h3>
+  <div id="charts">
+	  <div id="chart_div"></div>
+	  <div id="columnchart_values"></div>
+  </div>
   </div>
 </div>

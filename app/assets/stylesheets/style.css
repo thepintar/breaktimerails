@@ -2,6 +2,19 @@ body {
 	margin: 0px;
 }
 
+#chart_div{
+	display: inline-block;
+}
+
+#columnchart_values{
+	display: inline-block;
+}
+
+#charts{
+	margin: 0 auto;
+	width: 90%;
+}
+
 .background {
 	position: relative;
 	/*overflow: hidden;form*/

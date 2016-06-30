@@ -5,12 +5,16 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
+
   get '/signup' => 'users#new'
   post '/signup' => 'users#create'
 
   post '/activity' => 'activities#create'
 
   resources :users
+
+  get '/users/:id/data' => 'users#data'
+  
   resources :friendships
   resources :timeboxes
   resources :activities
